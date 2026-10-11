@@ -23,6 +23,7 @@ fi
 
 # 2. Build / Source Workspace
 WS_DIR="$HOME/ros2_ws_hare"
+rm -f "$WS_DIR/src/tag_net_ros"
 if [ ! -d "$WS_DIR/src/dex_tag_ros" ]; then
     echo "[!] Linking dex_tag_ros package into $WS_DIR/src..."
     ln -sfn /mnt/c/Users/hareh/.gemini/antigravity/scratch/dex_tag_net/dex_tag_ros "$WS_DIR/src/dex_tag_ros"
