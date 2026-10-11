@@ -53,10 +53,21 @@ def generate_launch_description():
         output='screen'
     )
 
+    # 6. RViz2 Visualizer (3D Markers & Real-Time Grasp Heatmap View)
+    rviz_config = os.path.join(pkg_dex_tag, 'config', 'dex_tag.rviz')
+    rviz_node = Node(
+        package='rviz2',
+        executable='rviz2',
+        name='rviz2',
+        arguments=['-d', rviz_config],
+        output='screen'
+    )
+
     return LaunchDescription([
         gz_sim,
         ros_gz_bridge,
         static_tf,
         dex_node,
-        commander_node
+        commander_node,
+        rviz_node
     ])
