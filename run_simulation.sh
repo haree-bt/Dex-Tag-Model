@@ -34,9 +34,14 @@ colcon build --symlink-install --packages-select dex_tag_ros
 source "$WS_DIR/install/setup.bash"
 echo "[✓] dex_tag_ros package compiled and active."
 
-# 3. Launch Simulation
+# 3. Setup Gazebo Model & Resource Paths
+MODELS_DIR="$WS_DIR/src/dex_tag_ros/models"
+export GZ_SIM_RESOURCE_PATH="$MODELS_DIR:/opt/ros/jazzy/share:${GZ_SIM_RESOURCE_PATH:-}"
+export SDF_PATH="$MODELS_DIR:/opt/ros/jazzy/share:${SDF_PATH:-}"
+
+# 4. Launch Simulation
 echo "=========================================================================="
-echo ">>> Booting Gazebo Harmonic Simulator & Dex-TAG Perception Node..."
+echo ">>> Booting Gazebo Harmonic Simulator, 6-DoF UR5e Arm & Dex-TAG Node..."
 echo "=========================================================================="
 
 ros2 launch dex_tag_ros simulation.launch.py

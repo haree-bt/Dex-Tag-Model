@@ -1,4 +1,5 @@
 # Dex-TAG ROS 2 <-> Gazebo Harmonic Bridge Config
+# Vision Sensors
 - ros_topic_name: "/camera/image"
   gz_topic_name: "/camera/image"
   ros_type_name: "sensor_msgs/msg/Image"
@@ -15,4 +16,74 @@
   gz_topic_name: "/camera/camera_info"
   ros_type_name: "sensor_msgs/msg/CameraInfo"
   gz_type_name: "gz.msgs.CameraInfo"
+  direction: GZ_TO_ROS
+
+# Joint Position Commands (UR5e 6-DoF Arm)
+- ros_topic_name: "/model/ur5e_manipulator/joint/shoulder_pan_joint/cmd_pos"
+  gz_topic_name: "/model/ur5e_manipulator/joint/shoulder_pan_joint/cmd_pos"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "gz.msgs.Double"
+  direction: ROS_TO_GZ
+
+- ros_topic_name: "/model/ur5e_manipulator/joint/shoulder_lift_joint/cmd_pos"
+  gz_topic_name: "/model/ur5e_manipulator/joint/shoulder_lift_joint/cmd_pos"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "gz.msgs.Double"
+  direction: ROS_TO_GZ
+
+- ros_topic_name: "/model/ur5e_manipulator/joint/elbow_joint/cmd_pos"
+  gz_topic_name: "/model/ur5e_manipulator/joint/elbow_joint/cmd_pos"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "gz.msgs.Double"
+  direction: ROS_TO_GZ
+
+- ros_topic_name: "/model/ur5e_manipulator/joint/wrist_1_joint/cmd_pos"
+  gz_topic_name: "/model/ur5e_manipulator/joint/wrist_1_joint/cmd_pos"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "gz.msgs.Double"
+  direction: ROS_TO_GZ
+
+- ros_topic_name: "/model/ur5e_manipulator/joint/wrist_2_joint/cmd_pos"
+  gz_topic_name: "/model/ur5e_manipulator/joint/wrist_2_joint/cmd_pos"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "gz.msgs.Double"
+  direction: ROS_TO_GZ
+
+- ros_topic_name: "/model/ur5e_manipulator/joint/wrist_3_joint/cmd_pos"
+  gz_topic_name: "/model/ur5e_manipulator/joint/wrist_3_joint/cmd_pos"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "gz.msgs.Double"
+  direction: ROS_TO_GZ
+
+# Joint Position Commands (Dex-TAG 3-Finger Adaptive Hand)
+- ros_topic_name: "/model/ur5e_manipulator/joint/finger_thumb_joint/cmd_pos"
+  gz_topic_name: "/model/ur5e_manipulator/joint/finger_thumb_joint/cmd_pos"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "gz.msgs.Double"
+  direction: ROS_TO_GZ
+
+- ros_topic_name: "/model/ur5e_manipulator/joint/finger_index_joint/cmd_pos"
+  gz_topic_name: "/model/ur5e_manipulator/joint/finger_index_joint/cmd_pos"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "gz.msgs.Double"
+  direction: ROS_TO_GZ
+
+- ros_topic_name: "/model/ur5e_manipulator/joint/finger_middle_joint/cmd_pos"
+  gz_topic_name: "/model/ur5e_manipulator/joint/finger_middle_joint/cmd_pos"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "gz.msgs.Double"
+  direction: ROS_TO_GZ
+
+# Detachable Joint Trigger for Physical Grasp Transport
+- ros_topic_name: "/model/ur5e_manipulator/detachable_joint/attach"
+  gz_topic_name: "/model/ur5e_manipulator/detachable_joint/attach"
+  ros_type_name: "std_msgs/msg/Empty"
+  gz_type_name: "gz.msgs.Empty"
+  direction: ROS_TO_GZ
+
+# Robot Joint States
+- ros_topic_name: "/joint_states"
+  gz_topic_name: "/joint_states"
+  ros_type_name: "sensor_msgs/msg/JointState"
+  gz_type_name: "gz.msgs.Model"
   direction: GZ_TO_ROS

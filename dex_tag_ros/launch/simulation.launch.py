@@ -1,7 +1,7 @@
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription
+from launch.actions import IncludeLaunchDescription, SetEnvironmentVariable
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 
@@ -12,6 +12,14 @@ def generate_launch_description():
 
     world_sdf = os.path.join(pkg_dex_tag, 'worlds', 'tabletop_dexterous.sdf')
     bridge_config = os.path.join(pkg_dex_tag, 'config', 'ros_gz_bridge.yaml')
+    models_dir = os.path.join(pkg_dex_tag, 'models')
+    ur_share = '/opt/ros/jazzy/share'
+
+    curr_res = os.environ.get('GZ_SIM_RESOURCE_PATH', '')
+    res_path = f"{models_dir}:{ur_share}:{curr_res}" if curr_res else f"{models_dir}:{ur_share}"
+
+    set_env_res = SetEnvironmentVariable('GZ_SIM_RESOURCE_PATH', res_path)
+    set_env_sdf = SetEnvironmentVariable('SDF_PATH', res_path)
 
     # 1. Gazebo Sim Launch
     gz_sim = IncludeLaunchDescription(
@@ -64,6 +72,8 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
+        set_env_res,
+        set_env_sdf,
         gz_sim,
         ros_gz_bridge,
         static_tf,

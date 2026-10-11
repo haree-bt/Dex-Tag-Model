@@ -69,15 +69,26 @@ dex_tag_ros/
 ├── setup.py                      # colcon entrypoints
 ├── dex_tag_ros/
 │   ├── dex_tag_node.py          # Real-time PyTorch AI perception & contact synthesis
-│   └── dex_commander.py         # Autonomous FSM manipulation supervisor
+│   └── dex_commander.py         # Autonomous 6-DoF trajectory supervisor & FSM
 ├── launch/
 │   └── simulation.launch.py     # Launches Gazebo Harmonic, ros_gz_bridge & perception
 ├── worlds/
 │   └── tabletop_dexterous.sdf   # Gazebo Harmonic world with calibrated RGB-D camera
 ├── config/
-│   └── ros_gz_bridge.yaml       # High-throughput image & depth bridge config
-└── models/industrial_tool/      # Dual-affordance SDF simulation model
+│   ├── ros_gz_bridge.yaml       # Joint position commands & camera bridge config
+│   └── dex_tag.rviz             # RViz2 visualization configuration
+└── models/
+    ├── ur5e_manipulator/        # Authentic 6-DoF Universal Robots UR5e + 3-finger hand
+    ├── ur_description/          # High-fidelity UR5e industrial CAD meshes (DAE/STL)
+    └── industrial_tool/         # Dual-affordance SDF simulation model
 ```
+
+### 🤖 Robotic Arm & Manipulator Specifications
+* **Kinematic Base:** Authentic 6-DoF **Universal Robots UR5e** industrial manipulator ($850\text{ mm}$ reach, $5\text{ kg}$ payload).
+* **End-Effector:** Adaptive 3-finger dexterous gripper equipped with independent prismatic actuators (`finger_thumb`, `finger_index`, `finger_middle`).
+* **Joint Control:** Actuated via `gz::sim::systems::JointPositionController` plugins bridged to ROS 2 at 20 Hz with minimum-jerk S-curve cosine interpolation.
+* **Firm Grasp Transport:** Powered by `gz::sim::systems::DetachableJoint` for realistic physical tool lifting without physics slip.
+
 
 ---
 

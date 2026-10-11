@@ -40,6 +40,7 @@ if PROJECT_ROOT not in sys.path:
 
 try:
     import torch
+    torch.set_num_threads(2)
     from models.dex_tag import DexTAG
     TORCH_AVAILABLE = True
 except Exception as e:
